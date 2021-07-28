@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  altobot-deploy
+  labels:
+    name:  altobot-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      server: altobot-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        server: altobot-app
+    spec:
+      containers:
+      - name: altobot-app
+        image: talk2victormarius/altobot:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80

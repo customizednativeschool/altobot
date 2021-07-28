@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: altobot-pod
+  labels:
+    name: altobot-pod
+    app: altobot-app
+spec:
+  containers:
+  - name: altobot-app
+    image: talk2victormarius/altobot
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 5000
